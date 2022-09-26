@@ -1,5 +1,6 @@
 import React from "react";
 import { useState } from "react";
+import { addTodo } from "api/useFetchingTodos";
 import cl from "./PostForm.module.css";
 
 export const PostForm = () => {
@@ -7,14 +8,17 @@ export const PostForm = () => {
 	const [todoDate, setTodoDate] = useState("");
 
 	const submitPost = (e) => {
-		e.stopPropagation();
-
-		console.log(e);
+		const todoItem = {
+			todo,
+			todoDate,
+		};
+		addTodo(todoItem);
 	};
 
 	return (
-		<form className={cl.form} onSubmit={(e) => e.stopPropagation()}>
+		<form className={cl.form} onSubmit={(e) => e.preventDefault()}>
 			<input
+				//add focus (useRef)
 				value={todo}
 				onInput={(e) => setTodo(e.target.value)}
 				type="text"

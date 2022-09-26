@@ -1,19 +1,17 @@
 import React, { useState, useEffect } from "react";
 import { db } from "firebase.js";
 import { ref, onValue, update } from "firebase/database";
-import { toggleTodo, addTodo } from "api/useFetchingTodos";
-import { TodoItem } from "components/TodoItem/TodoItem";
+import { addTodo } from "api/useFetchingTodos";
+import { TodoItem } from "components/Postpage/TodoItem/TodoItem";
 import { MyModal } from "components/UI/MyModal/MyModal";
-import { PostForm } from "components/PostForm/PostForm";
+import { PostForm } from "components/Postpage/PostForm/PostForm";
 
 export const Postpage = () => {
 	const [todo, setTodo] = useState("");
+	const [todoDate, setTodoDate] = useState("");
 	const [todos, setTodos] = useState("");
 	const [isEditTodo, setIsEditTodo] = useState(false);
 
-	const handleCloseModal = () => {
-		setIsEditTodo(false);
-	};
 	//connecting to db
 	useEffect(() => {
 		onValue(ref(db, "todos"), (snapshot) => {
@@ -25,8 +23,14 @@ export const Postpage = () => {
 	}, []);
 
 	const handleAddTodo = () => {
-		addTodo(todo);
+		const todoItem = {
+			todo,
+			todoDate: Date.parse(todoDate),
+		};
+		console.log(todoItem);
+		addTodo(todoItem);
 		setTodo("");
+		setTodoDate("");
 	};
 
 	return (
@@ -41,6 +45,11 @@ export const Postpage = () => {
 				value={todo}
 				onChange={(e) => setTodo(e.target.value)}
 				type="text"
+			/>
+			<input
+				type="datetime-local"
+				value={todoDate}
+				onChange={(e) => setTodoDate(e.target.value)}
 			/>
 
 			<button onClick={handleAddTodo}>submit post</button>
@@ -58,6 +67,18 @@ export const Postpage = () => {
 
 			<button onClick={() => setIsEditTodo((prev) => !prev)}>
 				newAddTODO
+			</button>
+			<br />
+			<br />
+			<br />
+			<button
+				onClick={() => {
+					console.log(typeof todoDate);
+					const date = Date.parse(todoDate);
+					console.log(date);
+				}}
+			>
+				testDate
 			</button>
 		</div>
 	);

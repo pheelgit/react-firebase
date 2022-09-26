@@ -3,6 +3,8 @@ import { deleteTodo, toggleTodo } from "api/useFetchingTodos";
 import cl from "./TodoItem.module.css";
 
 export const TodoItem = ({ todo }) => {
+	const date = new Date(todo.todoDate);
+
 	return (
 		<div
 			// key={todo.uuid}
@@ -21,7 +23,9 @@ export const TodoItem = ({ todo }) => {
 			<button className="mx-2" onClick={() => toggleTodo(todo)}>
 				{todo.complete.toString()}
 			</button>
-			<span>{todo.todo}</span>
+
+			<span>{date.toDateString()} </span>
+			<span> {todo.todo}</span>
 		</div>
 	);
 };

@@ -12,10 +12,11 @@ import {
 } from "firebase/database";
 
 //add todo
-export const addTodo = (todo) => {
+export const addTodo = ({ todo, todoDate }) => {
 	const uuid = uid();
 	set(ref(db, `todos/${uuid}`), {
 		todo,
+		todoDate,
 		uuid,
 		complete: false,
 	});
