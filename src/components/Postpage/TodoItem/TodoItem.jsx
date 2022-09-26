@@ -1,5 +1,6 @@
 import React from "react";
 import { deleteTodo, toggleTodo } from "api/useFetchingTodos";
+import { sendTg } from "api/useFetchingTodos";
 import cl from "./TodoItem.module.css";
 
 export const TodoItem = ({ todo }) => {

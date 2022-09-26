@@ -1,14 +1,12 @@
 import React, { useState, useEffect } from "react";
 import { db } from "firebase.js";
 import { ref, onValue, update } from "firebase/database";
-import { addTodo } from "api/useFetchingTodos";
+import { addTodo, sendTg } from "api/useFetchingTodos";
 import { TodoItem } from "components/Postpage/TodoItem/TodoItem";
 import { MyModal } from "components/UI/MyModal/MyModal";
 import { PostForm } from "components/Postpage/PostForm/PostForm";
 
 export const Postpage = () => {
-	const [todo, setTodo] = useState("");
-	const [todoDate, setTodoDate] = useState("");
 	const [todos, setTodos] = useState("");
 	const [isEditTodo, setIsEditTodo] = useState(false);
 
@@ -22,37 +20,25 @@ export const Postpage = () => {
 		});
 	}, []);
 
-	const handleAddTodo = () => {
-		const todoItem = {
-			todo,
-			todoDate: Date.parse(todoDate),
-		};
-		console.log(todoItem);
-		addTodo(todoItem);
-		setTodo("");
-		setTodoDate("");
-	};
+	useEffect(() => {
+		const dateNow = Date.parse(new Date());
+		const mapTodos = [...todos].forEach((todo1) => {
+			if (todo1.todoDate < dateNow) {
+				console.log(todo1);
+				console.log(new Date(todo1.todoDate));
+			}
+		});
+
+		console.log(mapTodos);
+	}, [todos]);
 
 	return (
 		<div>
 			{isEditTodo ? (
 				<MyModal isVisible={setIsEditTodo}>
-					<PostForm />
+					<PostForm isVisible={setIsEditTodo} />
 				</MyModal>
 			) : null}
-
-			<input
-				value={todo}
-				onChange={(e) => setTodo(e.target.value)}
-				type="text"
-			/>
-			<input
-				type="datetime-local"
-				value={todoDate}
-				onChange={(e) => setTodoDate(e.target.value)}
-			/>
-
-			<button onClick={handleAddTodo}>submit post</button>
 
 			<br />
 			<div>
@@ -71,15 +57,6 @@ export const Postpage = () => {
 			<br />
 			<br />
 			<br />
-			<button
-				onClick={() => {
-					console.log(typeof todoDate);
-					const date = Date.parse(todoDate);
-					console.log(date);
-				}}
-			>
-				testDate
-			</button>
 		</div>
 	);
 };
