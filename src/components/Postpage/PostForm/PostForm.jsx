@@ -18,7 +18,6 @@ export const PostForm = ({ isVisible }) => {
 	}, []);
 
 	const keyDownHandler = (e) => {
-		console.log(e.target === inputTodoRef.current);
 		if (e.target === inputTodoRef.current && e.code === "Enter") {
 			inputTodoDateRef.current.focus();
 			return;
@@ -34,7 +33,6 @@ export const PostForm = ({ isVisible }) => {
 	return (
 		<form className={cl.form} onSubmit={(e) => e.preventDefault()}>
 			<input
-				//add focus (useRef)
 				ref={inputTodoRef}
 				type="text"
 				className={cl.formTodo}

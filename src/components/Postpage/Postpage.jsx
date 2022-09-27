@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { db } from "firebase.js";
-import { ref, onValue, update } from "firebase/database";
-import { addTodo, sendTg } from "api/useFetchingTodos";
+import { ref, onValue } from "firebase/database";
 import { TodoItem } from "components/Postpage/TodoItem/TodoItem";
 import { MyModal } from "components/UI/MyModal/MyModal";
 import { PostForm } from "components/Postpage/PostForm/PostForm";
@@ -20,18 +19,6 @@ export const Postpage = () => {
 		});
 	}, []);
 
-	useEffect(() => {
-		const dateNow = Date.parse(new Date());
-		const mapTodos = [...todos].forEach((todo1) => {
-			if (todo1.todoDate < dateNow) {
-				console.log(todo1);
-				console.log(new Date(todo1.todoDate));
-			}
-		});
-
-		console.log(mapTodos);
-	}, [todos]);
-
 	return (
 		<div>
 			{isEditTodo ? (
@@ -40,23 +27,39 @@ export const Postpage = () => {
 				</MyModal>
 			) : null}
 
-			<br />
 			<div>
 				{todos.length === 0 ? (
 					<h1>no todos</h1>
 				) : (
-					todos.map((todo) => (
-						<TodoItem key={todo.uuid} todo={todo} />
-					))
+					todos.map((todo) =>
+						todo.complete ? null : (
+							<TodoItem
+								key={todo.uuid}
+								todo={todo}
+							/>
+						)
+					)
+				)}
+			</div>
+			<hr className="h-2 my-2 bg-slate-800" />
+			<div>
+				{todos.length === 0 ? (
+					<h1>no todos</h1>
+				) : (
+					todos.map((todo) =>
+						todo.complete ? (
+							<TodoItem
+								key={todo.uuid}
+								todo={todo}
+							/>
+						) : null
+					)
 				)}
 			</div>
 
 			<button onClick={() => setIsEditTodo((prev) => !prev)}>
 				newAddTODO
 			</button>
-			<br />
-			<br />
-			<br />
 		</div>
 	);
 };

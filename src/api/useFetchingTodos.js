@@ -21,13 +21,20 @@ export const addTodo = ({ todo, todoDate }) => {
 		todoDate,
 		uuid,
 		complete: false,
+		expired: todoDate === "" ? true : false,
 	});
 };
 
-//toggle todo
-export const toggleTodo = (todo) => {
+//toggle todo complete
+export const toggleTodoComplete = (todo) => {
 	update(ref(db, `todos/${todo.uuid}`), {
 		complete: !todo.complete,
+	});
+};
+//toggle todo expired
+export const toggleTodoExpired = (todo) => {
+	update(ref(db, `todos/${todo.uuid}`), {
+		expired: !todo.expired,
 	});
 };
 
