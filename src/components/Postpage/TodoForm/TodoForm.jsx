@@ -1,15 +1,15 @@
 import React from "react";
 import { useState, useRef, useEffect } from "react";
 import { addTodo } from "api/useFetchingTodos";
-import cl from "./PostForm.module.css";
+import cl from "./TodoForm.module.css";
 
-export const PostForm = ({ isVisible }) => {
+export const TodoForm = ({ isVisible }) => {
 	const defaultTodo = { todo: "", todoDate: "" };
 	const [todoItem, setTodoItem] = useState(defaultTodo);
 	const inputTodoRef = useRef();
 	const inputTodoDateRef = useRef();
 
-	const submitPost = (e) => {
+	const submitTodo = (e) => {
 		addTodo(todoItem);
 		isVisible(false);
 	};
@@ -26,7 +26,7 @@ export const PostForm = ({ isVisible }) => {
 			e.target === inputTodoDateRef.current &&
 			e.code === "Enter"
 		) {
-			submitPost();
+			submitTodo();
 		}
 	};
 
@@ -63,7 +63,7 @@ export const PostForm = ({ isVisible }) => {
 				type="button"
 				className={cl.formBtn}
 				onClick={() => {
-					submitPost();
+					submitTodo();
 				}}
 			>
 				todo

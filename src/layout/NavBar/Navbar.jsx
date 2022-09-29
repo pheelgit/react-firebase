@@ -1,15 +1,14 @@
 import React from "react";
-import cl from "styles/Navbar.module.css";
 import { CustomLink } from "components/CustomLink";
+import cl from "./Navbar.module.css";
 
 export const Navbar = () => {
 	return (
 		<>
 			<nav className={cl.nav}>
 				<CustomLink to="/">home</CustomLink>
-				<CustomLink to="/about">about</CustomLink>
-				<CustomLink to="/posts">posts</CustomLink>
-				<CustomLink to="/posts/23">post page</CustomLink>
+				<CustomLink to="/shoplist">shoplist</CustomLink>
+				<CustomLink to="/todos">todos</CustomLink>
 			</nav>
 		</>
 	);

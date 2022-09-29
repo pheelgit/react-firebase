@@ -3,9 +3,9 @@ import { db } from "firebase.js";
 import { ref, onValue } from "firebase/database";
 import { TodoItem } from "components/Postpage/TodoItem/TodoItem";
 import { MyModal } from "components/UI/MyModal/MyModal";
-import { PostForm } from "components/Postpage/PostForm/PostForm";
+import { TodoForm } from "components/Postpage/TodoForm/TodoForm";
 
-export const Postpage = () => {
+export const TodoPage = () => {
 	const [todos, setTodos] = useState("");
 	const [isEditTodo, setIsEditTodo] = useState(false);
 
@@ -23,7 +23,7 @@ export const Postpage = () => {
 		<div>
 			{isEditTodo ? (
 				<MyModal isVisible={setIsEditTodo}>
-					<PostForm isVisible={setIsEditTodo} />
+					<TodoForm isVisible={setIsEditTodo} />
 				</MyModal>
 			) : null}
 

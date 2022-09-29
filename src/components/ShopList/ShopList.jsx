@@ -1,6 +1,6 @@
 import React from "react";
 
-export const Blogpage = () => {
+export const ShopList = () => {
 	return (
 		<div>
 			<p>demo website React-router-dom library</p>
