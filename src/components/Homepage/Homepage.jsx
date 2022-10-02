@@ -9,45 +9,45 @@ export const Homepage = () => {
 
 			<input
 				type="date"
-				value=""
-				class="input-txt"
+				// value=""
+				className="input-txt"
 				id="date"
 				aria-required="true"
 				aria-invalid="false"
 				placeholder="Enter the needed date"
-				onchange="this.className=(this.value!=''?'has-value':'')"
+				// onChange="this.className=(this.value!=''?'has-value':'')"
 			/>
 
-			<form class="pa__top-sec">
-				<div class="pa__top-title btn-sec">
+			<form className="pa__top-sec">
+				<div className="pa__top-title btn-sec">
 					Search by date
 				</div>
-				<div class="pa__middle-range">
-					<div class="pa__middle-item">
+				<div className="pa__middle-range">
+					<div className="pa__middle-item">
 						<input
-							class="pa__middle-input text"
+							className="pa__middle-input text"
 							type="date"
 							name="date"
 							placeholder="From"
-							onchange="this.className=(this.value!=''?'has-value':'')"
+							// onChange="this.className=(this.value!=''?'has-value':'')"
 							required
 						/>
 					</div>
-					<div class="pa__middle-item">
+					<div className="pa__middle-item">
 						{" "}
 						<input
-							class="pa__middle-input text"
+							className="pa__middle-input text"
 							type="date"
 							name="date"
 							placeholder="To"
-							onchange="this.className=(this.value!=''?'has-value':'')"
+							// onChange="this.className=(this.value!=''?'has-value':'')"
 							required
 						/>
 					</div>
-					<div class="pa__middle-btn">
+					<div className="pa__middle-btn">
 						{" "}
 						<button
-							class="btn btn-accent"
+							className="btn btn-accent"
 							type="reset"
 						>
 							Reset

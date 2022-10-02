@@ -6,6 +6,7 @@ import { store } from "./store/store";
 import App from "./App";
 import "./style.css";
 import "./firebase";
+import "tw-elements";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(

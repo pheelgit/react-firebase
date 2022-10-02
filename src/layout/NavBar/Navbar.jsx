@@ -9,6 +9,7 @@ export const Navbar = () => {
 				<CustomLink to="/">home</CustomLink>
 				<CustomLink to="/shoplist">shoplist</CustomLink>
 				<CustomLink to="/todos">todos</CustomLink>
+				<CustomLink to="/test">test page</CustomLink>
 			</nav>
 		</>
 	);
