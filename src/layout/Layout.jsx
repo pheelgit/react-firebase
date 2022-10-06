@@ -1,5 +1,5 @@
 import React from "react";
-import { AppRouter } from "router/AppRouter";
+import { AppRouter } from "AppRouter";
 import { Navbar } from "./NavBar/Navbar";
 import { Footer } from "./Footer/Footer";
 import cl from "./Layout.module.css";

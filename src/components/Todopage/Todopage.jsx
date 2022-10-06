@@ -26,7 +26,6 @@ export const TodoPage = () => {
 					<TodoForm isVisible={setIsEditTodo} />
 				</MyModal>
 			) : null}
-
 			<div>
 				{todos.length === 0 ? (
 					<h1>no todos</h1>
@@ -56,9 +55,8 @@ export const TodoPage = () => {
 					)
 				)}
 			</div>
-
 			<button onClick={() => setIsEditTodo((prev) => !prev)}>
-				newAddTODO
+				newAddTODO, сделать поповер вместо модалки
 			</button>
 		</div>
 	);
