@@ -1,38 +1,38 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useEffect } from "react";
+import { useParams } from "react-router-dom";
+
+import { addShopItem } from "api/useFetchingShopList";
 
 export const ShopItemInput = () => {
-	const defaultShopItem = { item: "", type: "food" };
-	const [shopItem, setShopItem] = useState(defaultShopItem);
-	const itemRef = useRef(null);
+	const [shopItem, setShopItem] = useState({ item: "", type: "" });
+	const { "*": shopItemType } = useParams();
 
-	const itemHandler = () => {
-		setShopItem({ ...shopItem, item: itemRef.current.value });
-		console.log(shopItem);
-		itemRef.current.value = "";
+	useEffect(() => {
+		setShopItem({ ...shopItem, type: shopItemType });
+	}, [shopItemType]);
+
+	const itemSubmit = () => {
+		addShopItem(shopItem);
+
+		setShopItem({
+			...shopItem,
+			item: "",
+		});
 	};
-	const typeToggle = (e) =>
-		setShopItem({ ...shopItem, type: e.target.value });
 
 	return (
 		<div>
-			<input type="text" ref={itemRef} />
 			<input
-				type="radio"
-				id="shop-toggle_html"
-				name="fav_language"
-				value="food"
-				onChange={typeToggle}
+				type="text"
+				value={shopItem.item}
+				onChange={(e) =>
+					setShopItem({
+						...shopItem,
+						item: e.target.value,
+					})
+				}
 			/>
-			<label htmlFor="shop-toggle_html">food</label>
-			<input
-				type="radio"
-				id="shop-toggle_css"
-				name="fav_language"
-				value="other"
-				onChange={typeToggle}
-			/>
-			<label htmlFor="shop-toggle_css"> other </label>
-			<button onClick={itemHandler}> add item</button>
+			<button onClick={itemSubmit}> add item</button>
 			<br />
 		</div>
 	);
