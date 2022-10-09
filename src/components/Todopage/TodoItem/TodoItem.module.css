@@ -1,6 +1,16 @@
 .todo {
-	@apply max-w-fit border-cyan-500 border-solid border-2;
+	@apply my-2 p-1 max-w-fit border-fuchsia-600 border-solid border-2 rounded-lg;
 }
 .todoComplete {
-	@apply max-w-fit border-cyan-500 border-solid border-2 bg-stone-500;
+	@apply my-2 max-w-fit border-cyan-500 border-solid border-2 bg-stone-500;
+}
+
+.todoDelete {
+	@apply bg-red-200 mx-2 border-x-red-800;
+}
+.todoUpdate {
+	@apply bg-green-200 mx-2 border-x-gray-800;
+}
+.todoComplete {
+	@apply mx-2;
 }

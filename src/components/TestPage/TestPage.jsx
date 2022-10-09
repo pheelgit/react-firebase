@@ -338,6 +338,14 @@ export const TestPage = () => {
 			</a>
 			<br />
 			<hr className="h-2 bg-black" />
+			<a href="https://theme-ui.com/components">
+				https://theme-ui.com/components
+			</a>
+			<hr className="h-2 bg-black" />
+			<a href="https://www.material-tailwind.com/docs/react/navbar#">
+				https://www.material-tailwind.com/docs/react/navbar#
+			</a>
+			<hr className="h-2 bg-black" />
 		</div>
 	);
 };

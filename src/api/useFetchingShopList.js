@@ -19,5 +19,13 @@ export const addShopItem = ({ item, type }) => {
 		item,
 		type,
 		uuid,
+		complete: false,
+	});
+};
+
+//toggle complete
+export const toggleShopComplete = ({ type, uuid, complete }) => {
+	update(ref(db, `shoplist/${type}/${uuid}`), {
+		complete: !complete,
 	});
 };

@@ -7,7 +7,6 @@ import {
 import { sendTg } from "api/useFetchingTodos";
 import cl from "./TodoItem.module.css";
 import { useEffect } from "react";
-import { useState } from "react";
 
 export const TodoItem = ({ todo }) => {
 	const date = new Date(todo.todoDate);
@@ -30,21 +29,19 @@ export const TodoItem = ({ todo }) => {
 	return (
 		<div className={todo.complete ? cl.todoComplete : cl.todo}>
 			<button
-				// data={todo.uuid}
-				className="bg-red-200 mx-2 border-x-red-800"
+				className={cl.todoDelete}
 				onClick={() => deleteTodo(todo)}
 			>
-				delete
+				del
 			</button>
-			<button className="bg-green-200 mx-2 border-x-gray-800">
-				update
-			</button>
-			<button
-				className="mx-2"
-				onClick={() => toggleTodoComplete(todo)}
-			>
-				{todo.complete.toString()}
-			</button>
+			<button className={cl.todoUpdate}>upd</button>
+
+			<input
+				className={cl.todoComplete}
+				type="checkbox"
+				checked={todo.complete}
+				onChange={() => toggleTodoComplete(todo)}
+			/>
 
 			<span>{date.toDateString()} </span>
 			<span> {todo.todo}</span>

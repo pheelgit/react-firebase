@@ -1,0 +1,14 @@
+.add {
+	@apply relative;
+}
+
+.input {
+	@apply w-full;
+}
+.popOverContent {
+	@apply absolute mb-6 bottom-full right-full w-40 bg-red-400  p-6 rounded-2xl
+  sm:w-80;
+}
+.hide {
+	@apply h-0 w-0 scale-0;
+}

@@ -3,8 +3,9 @@ import { useState, useRef, useEffect } from "react";
 import { addTodo } from "api/useFetchingTodos";
 import cl from "./TodoForm.module.css";
 
+const defaultTodo = { todo: "", todoDate: "" };
+
 export const TodoForm = ({ isVisible }) => {
-	const defaultTodo = { todo: "", todoDate: "" };
 	const [todoItem, setTodoItem] = useState(defaultTodo);
 	const inputTodoRef = useRef();
 	const inputTodoDateRef = useRef();
@@ -12,6 +13,7 @@ export const TodoForm = ({ isVisible }) => {
 	const submitTodo = (e) => {
 		addTodo(todoItem);
 		isVisible(false);
+		setTodoItem(defaultTodo);
 	};
 	useEffect(() => {
 		inputTodoRef.current.focus();
@@ -66,10 +68,8 @@ export const TodoForm = ({ isVisible }) => {
 					submitTodo();
 				}}
 			>
-				todo
+				add todo
 			</button>
-
-			{JSON.stringify(todoItem)}
 		</form>
 	);
 };

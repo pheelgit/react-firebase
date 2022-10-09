@@ -7,11 +7,11 @@ import cl from "./Layout.module.css";
 export const Layout = () => {
 	return (
 		<div className={cl.layout}>
-			<Navbar />
+			{/* <Footer /> */}
 			<main className={cl.main}>
 				<AppRouter />
 			</main>
-			<Footer />
+			<Navbar />
 		</div>
 	);
 };

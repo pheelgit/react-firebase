@@ -5,9 +5,18 @@ import { TodoItem } from "components/Todopage/TodoItem/TodoItem";
 import { MyModal } from "components/UI/MyModal/MyModal";
 import { TodoForm } from "components/Todopage/TodoForm/TodoForm";
 
+import cl from "./Todopage.module.css";
+import { MyPopover } from "components/UI/MyModal/MyPopover/MyPopover";
+
 export const TodoPage = () => {
-	const [todos, setTodos] = useState("");
-	const [isEditTodo, setIsEditTodo] = useState(false);
+	const [todos, setTodos] = useState([]);
+	const [todosCompleted, setTodosCompleted] = useState([]);
+	const [todosUncompleted, setTodosUncompleted] = useState([]);
+	const [isPopped, setIsPopped] = useState(false);
+
+	const togglePopped = () => {
+		setIsPopped(!isPopped);
+	};
 
 	//connecting to db
 	useEffect(() => {
@@ -19,45 +28,42 @@ export const TodoPage = () => {
 		});
 	}, []);
 
+	useEffect(() => {
+		setTodosCompleted(todos.filter((e) => e.complete));
+		setTodosUncompleted(todos.filter((e) => !e.complete));
+	}, [todos]);
+
 	return (
-		<div>
-			{isEditTodo ? (
-				<MyModal isVisible={setIsEditTodo}>
-					<TodoForm isVisible={setIsEditTodo} />
-				</MyModal>
-			) : null}
+		<div className={cl.todoPage}>
+			<div>{todos.length === 0 && <h1>no todos</h1>}</div>
 			<div>
-				{todos.length === 0 ? (
-					<h1>no todos</h1>
-				) : (
-					todos.map((todo) =>
-						todo.complete ? null : (
-							<TodoItem
-								key={todo.uuid}
-								todo={todo}
-							/>
-						)
-					)
-				)}
+				{todosUncompleted.map((todo) => (
+					<TodoItem key={todo.uuid} todo={todo} />
+				))}
 			</div>
 			<hr className="h-2 my-2 bg-slate-800" />
 			<div>
-				{todos.length === 0 ? (
-					<h1>no todos</h1>
-				) : (
-					todos.map((todo) =>
-						todo.complete ? (
-							<TodoItem
-								key={todo.uuid}
-								todo={todo}
-							/>
-						) : null
-					)
+				{todosCompleted.map((todo) => (
+					<TodoItem key={todo.uuid} todo={todo} />
+				))}
+			</div>
+			<br />
+			<div className="relative">
+				<button
+					onClick={togglePopped}
+					data-mdb-ripple="true"
+					data-mdb-ripple-color="light"
+					className={cl.popOverBtn}
+				>
+					{isPopped ? "hide" : "add todo"}
+				</button>
+				{isPopped && (
+					<MyPopover isVisible={togglePopped}>
+						{" "}
+						<TodoForm isVisible={togglePopped} />
+					</MyPopover>
 				)}
 			</div>
-			<button onClick={() => setIsEditTodo((prev) => !prev)}>
-				newAddTODO, сделать поповер вместо модалки
-			</button>
 		</div>
 	);
 };
