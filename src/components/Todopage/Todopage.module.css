@@ -10,10 +10,14 @@
   active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out;
 }
 
+.popOverBtnPopped {
+	@apply bg-red-500
+  hover:bg-red-700 hover:shadow-lg;
+}
+
 .popOverContent {
 	@apply absolute mb-60 bottom-full w-full bg-slate-400  p-6 rounded-2xl
-  sm:w-80
-  /* before:content-['']  before:bg-red-500/50 before:fixed before:absolute before:inset-0; */;
+  sm:w-80;
 }
 .hide {
 	@apply h-0 w-0 scale-0;

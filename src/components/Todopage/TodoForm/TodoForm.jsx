@@ -3,18 +3,26 @@ import { useState, useRef, useEffect } from "react";
 import { addTodo } from "api/useFetchingTodos";
 import cl from "./TodoForm.module.css";
 
-const defaultTodo = { todo: "", todoDate: "" };
+export const TodoForm = (props) => {
+	const {
+		isVisible,
+		todo = "",
+		todoDate = "",
+		updating = false,
+		uuid = "",
+	} = props;
+	console.log("form upd");
 
-export const TodoForm = ({ isVisible }) => {
-	const [todoItem, setTodoItem] = useState(defaultTodo);
+	const [todoItem, setTodoItem] = useState({ todo, todoDate });
 	const inputTodoRef = useRef();
 	const inputTodoDateRef = useRef();
 
-	const submitTodo = (e) => {
+	const submitTodo = () => {
 		addTodo(todoItem);
 		isVisible(false);
-		setTodoItem(defaultTodo);
+		setTodoItem({ ...todoItem, todo: "", todoDate: "" });
 	};
+
 	useEffect(() => {
 		inputTodoRef.current.focus();
 	}, []);
@@ -63,12 +71,14 @@ export const TodoForm = ({ isVisible }) => {
 
 			<button
 				type="button"
+				data-mdb-ripple="true"
+				data-mdb-ripple-color="light"
 				className={cl.formBtn}
 				onClick={() => {
 					submitTodo();
 				}}
 			>
-				add todo
+				{updating ? "update" : "add todo"}
 			</button>
 		</form>
 	);

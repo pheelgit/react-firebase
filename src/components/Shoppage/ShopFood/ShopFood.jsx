@@ -1,4 +1,5 @@
 import React, { useEffect } from "react";
+import { useFilter } from "hooks/useFilter";
 
 import { db } from "firebase.js";
 import { onValue, ref } from "firebase/database";
@@ -8,6 +9,7 @@ import { ShopItem } from "../ShopItem/ShopItem";
 export const ShopFood = () => {
 	const [items, setItems] = useState([]);
 
+	//connecting to db
 	useEffect(() => {
 		onValue(ref(db, "shoplist/food"), (snapshot) => {
 			const data = snapshot.val();
@@ -15,21 +17,20 @@ export const ShopFood = () => {
 		});
 	}, []);
 
+	const completed = useFilter(items, ["complete", true]);
+	const unCompleted = useFilter(items, ["complete", false]);
+
 	return (
 		<div>
-			{items
-				.filter((item) => !item.complete)
-				.map((item) => (
-					<ShopItem key={item.uuid} {...item} />
-				))}
+			{unCompleted.map((item) => (
+				<ShopItem key={item.uuid} {...item} />
+			))}
 
 			<hr className="h-2 bg-emerald-500" />
 
-			{items
-				.filter((item) => item.complete)
-				.map((item) => (
-					<ShopItem key={item.uuid} {...item} />
-				))}
+			{completed.map((item) => (
+				<ShopItem key={item.uuid} {...item} />
+			))}
 		</div>
 	);
 };

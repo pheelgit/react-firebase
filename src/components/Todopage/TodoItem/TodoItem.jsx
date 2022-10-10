@@ -1,16 +1,22 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
+
+import { MyPopover } from "components/UI/MyPopover/MyPopover";
+import { TodoForm } from "../TodoForm/TodoForm";
+
 import {
 	deleteTodo,
 	toggleTodoComplete,
 	toggleTodoExpired,
+	sendTg,
 } from "api/useFetchingTodos";
-import { sendTg } from "api/useFetchingTodos";
+
 import cl from "./TodoItem.module.css";
-import { useEffect } from "react";
 
 export const TodoItem = ({ todo }) => {
+	const [isUpdating, setIsUpdating] = useState(false);
 	const date = new Date(todo.todoDate);
 
+	// checking to sendTG
 	useEffect(() => {
 		const checkDate = setInterval(() => {
 			if (
@@ -26,15 +32,37 @@ export const TodoItem = ({ todo }) => {
 		return () => clearInterval(checkDate);
 	}, []);
 
+	//update todo
+	const toggleUpdating = (todo) => {
+		console.log("update", todo);
+		setIsUpdating((isUpdating) => !isUpdating);
+	};
+
 	return (
-		<div className={todo.complete ? cl.todoComplete : cl.todo}>
+		<div
+			className={
+				todo.complete
+					? `${cl.todo} ${cl.todoComplete}`
+					: cl.todo
+			}
+		>
+			{isUpdating ? (
+				<MyPopover>
+					<TodoForm updating {...todo} />{" "}
+				</MyPopover>
+			) : null}
 			<button
-				className={cl.todoDelete}
+				className={cl.todoDeleteBtn}
 				onClick={() => deleteTodo(todo)}
 			>
 				del
 			</button>
-			<button className={cl.todoUpdate}>upd</button>
+			<button
+				className={cl.todoUpdateBtn}
+				onClick={() => toggleUpdating(todo)}
+			>
+				upd
+			</button>
 
 			<input
 				className={cl.todoComplete}
