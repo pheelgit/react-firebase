@@ -1,6 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { CustomLink } from "components/CustomLink";
+import { CustomLink } from "components/UI/MyLink/CustomLink";
 import cl from "./Navbar.module.css";
 
 export const Navbar = () => {

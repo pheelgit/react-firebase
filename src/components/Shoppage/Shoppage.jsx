@@ -23,8 +23,9 @@ export const Shoppage = () => {
 					<Link
 						to="food"
 						className={
-							pathname.includes("food") &&
-							"bg-red-200"
+							pathname.includes("food")
+								? "bg-red-200"
+								: ""
 						}
 					>
 						food
@@ -32,8 +33,9 @@ export const Shoppage = () => {
 					<Link
 						to="other"
 						className={
-							pathname.includes("other") &&
-							"bg-red-200"
+							pathname.includes("other")
+								? "bg-red-200"
+								: ""
 						}
 					>
 						other

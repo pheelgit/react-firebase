@@ -1,6 +1,18 @@
-import React from "react";
-
+import React, { useEffect } from "react";
+import { useForm } from "react-hook-form";
 export const TestPage = () => {
+	const {
+		register,
+		handleSubmit,
+		setFocus,
+		formState: { errors },
+	} = useForm({ mode: "onBlur" });
+
+	const onSubmit = (data) => console.log(data);
+	useEffect(() => {
+		setFocus("todo");
+	}, []);
+
 	return (
 		<div>
 			<hr className="h-2 bg-black" />

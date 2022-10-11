@@ -14,7 +14,6 @@ import axios from "axios";
 
 //add todo
 export const addTodo = ({ todo, todoDate }) => {
-	if (!todo.trim()) return;
 	const uuid = uid();
 	set(ref(db, `todos/${uuid}`), {
 		todo,

@@ -8,6 +8,7 @@ import { TodoForm } from "components/Todopage/TodoForm/TodoForm";
 import { MyPopover } from "components/UI/MyPopover/MyPopover";
 
 import cl from "./Todopage.module.css";
+import { TodoUseForm } from "./TodoUseForm/TodoUseForm";
 
 export const TodoPage = () => {
 	const [todos, setTodos] = useState([]);
@@ -61,6 +62,7 @@ export const TodoPage = () => {
 				>
 					{isPopped ? "hide" : "add todo"}
 				</button>
+				<TodoUseForm />
 
 				{isPopped ? (
 					<MyPopover isVisible={togglePopped}>
