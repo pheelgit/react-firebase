@@ -14,61 +14,11 @@ export const TodoForm = (props) => {
 	console.log("form upd");
 
 	const [todoItem, setTodoItem] = useState({ todo, todoDate });
-	const inputTodoRef = useRef();
-	const inputTodoDateRef = useRef();
 
-	const submitTodo = () => {
-		addTodo(todoItem);
-		isVisible(false);
-		setTodoItem({ ...todoItem, todo: "", todoDate: "" });
-	};
-
-	useEffect(() => {
-		inputTodoRef.current.focus();
-	}, []);
-
-	const keyDownHandler = (e) => {
-		if (e.target === inputTodoRef.current && e.code === "Enter") {
-			inputTodoDateRef.current.focus();
-			return;
-		}
-		if (
-			e.target === inputTodoDateRef.current &&
-			e.code === "Enter"
-		) {
-			submitTodo();
-		}
-	};
+	const submitTodo = () => {};
 
 	return (
 		<form className={cl.form} onSubmit={(e) => e.preventDefault()}>
-			<input
-				ref={inputTodoRef}
-				type="text"
-				className={cl.formTodo}
-				value={todoItem.todo}
-				onInput={(e) =>
-					setTodoItem({
-						...todoItem,
-						todo: e.target.value,
-					})
-				}
-				onKeyDown={keyDownHandler}
-				placeholder="write todo..."
-			/>
-
-			<input
-				ref={inputTodoDateRef}
-				type="datetime-local"
-				className={cl.formDate}
-				onChange={(e) =>
-					setTodoItem({
-						...todoItem,
-						todoDate: Date.parse(e.target.value),
-					})
-				}
-			/>
-
 			<button
 				type="button"
 				data-mdb-ripple="true"
@@ -78,7 +28,7 @@ export const TodoForm = (props) => {
 					submitTodo();
 				}}
 			>
-				{updating ? "update" : "add todo"}
+				asdasd
 			</button>
 		</form>
 	);

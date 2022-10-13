@@ -1,3 +1,6 @@
-.homePage {
-	@apply bg-blue-400 grid grid-cols-4;
+/* .homePage {
+	@apply 
+} */
+.btb {
+	@apply bg-red-400;
 }

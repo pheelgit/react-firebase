@@ -1,60 +1,30 @@
+import { Button, ButtonBase, Container, Popover } from "@mui/material";
+import {
+	AccessAlarm,
+	ThreeDRotation,
+	AccountCircle,
+} from "@mui/icons-material";
+// import AccountCircleIcon from "@mui/icons-material/AccountCircle";
+
 import React from "react";
 import cl from "./Homepage.module.css";
-import "./style.css";
+import { useState } from "react";
 
 export const Homepage = () => {
+	const [openPopover, setOpenPopover] = useState(false);
+	const togglePopover = () => setOpenPopover((prev) => !prev);
 	return (
 		<div className={cl.homePage}>
-			<h2>homePage</h2>
-
-			<input
-				type="date"
-				// value=""
-				className="input-txt"
-				id="date"
-				aria-required="true"
-				aria-invalid="false"
-				placeholder="Enter the needed date"
-				// onChange="this.className=(this.value!=''?'has-value':'')"
-			/>
-
-			<form className="pa__top-sec">
-				<div className="pa__top-title btn-sec">
-					Search by date
-				</div>
-				<div className="pa__middle-range">
-					<div className="pa__middle-item">
-						<input
-							className="pa__middle-input text"
-							type="date"
-							name="date"
-							placeholder="From"
-							// onChange="this.className=(this.value!=''?'has-value':'')"
-							required
-						/>
-					</div>
-					<div className="pa__middle-item">
-						{" "}
-						<input
-							className="pa__middle-input text"
-							type="date"
-							name="date"
-							placeholder="To"
-							// onChange="this.className=(this.value!=''?'has-value':'')"
-							required
-						/>
-					</div>
-					<div className="pa__middle-btn">
-						{" "}
-						<button
-							className="btn btn-accent"
-							type="reset"
-						>
-							Reset
-						</button>
-					</div>
-				</div>
-			</form>
+			<Container>
+				<Button
+					variant="contained"
+					className="bg-red=500"
+					onClick={togglePopover}
+				>
+					toggle
+					<Popover open={openPopover}>qwewe</Popover>
+				</Button>
+			</Container>
 		</div>
 	);
 };

@@ -5,10 +5,11 @@ import { ref, onValue } from "firebase/database";
 
 import { TodoItem } from "components/Todopage/TodoItem/TodoItem";
 import { TodoForm } from "components/Todopage/TodoForm/TodoForm";
-import { MyPopover } from "components/UI/MyPopover/MyPopover";
 
 import cl from "./Todopage.module.css";
 import { TodoUseForm } from "./TodoUseForm/TodoUseForm";
+import AddIcon from "@mui/icons-material/Add";
+import { Fab } from "@mui/material";
 
 export const TodoPage = () => {
 	const [todos, setTodos] = useState([]);
@@ -47,29 +48,16 @@ export const TodoPage = () => {
 				))}
 			</div>
 			<br />
-			<div className="relative">
-				<button
-					onClick={togglePopped}
-					data-mdb-ripple="true"
-					data-mdb-ripple-color="light"
-					className={
-						isPopped
-							? cl.popOverBtn +
-							  " " +
-							  cl.popOverBtnPopped
-							: cl.popOverBtn
-					}
-				>
-					{isPopped ? "hide" : "add todo"}
-				</button>
-				<TodoUseForm />
+			<Fab
+				color="primary"
+				aria-label="add"
+				className="sticky right-6 bottom-6 ml-auto"
+			>
+				<AddIcon fontSize="large" />
+			</Fab>
+			{/* <TodoUseForm /> */}
 
-				{isPopped ? (
-					<MyPopover isVisible={togglePopped}>
-						<TodoForm isVisible={togglePopped} />
-					</MyPopover>
-				) : null}
-			</div>
+			{isPopped ? <TodoForm isVisible={togglePopped} /> : null}
 		</div>
 	);
 };
