@@ -2,6 +2,7 @@ import React from "react";
 import { useState, useRef, useEffect } from "react";
 import { addTodo } from "api/useFetchingTodos";
 import cl from "./TodoForm.module.css";
+import { TextField } from "@mui/material";
 
 export const TodoForm = (props) => {
 	const {
@@ -19,6 +20,11 @@ export const TodoForm = (props) => {
 
 	return (
 		<form className={cl.form} onSubmit={(e) => e.preventDefault()}>
+			<TextField
+				id="outlined-uncontrolled"
+				label="Uncontrolled"
+				defaultValue="foo"
+			/>
 			<button
 				type="button"
 				data-mdb-ripple="true"

@@ -1,9 +1,10 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 
 import { addTodo } from "api/useFetchingTodos";
-
-import cl from "./TodoUseForm.module.css";
+import { FormContainer, TextFieldElement } from "react-hook-form-mui";
+import { DateTimePicker } from "@mui/x-date-pickers";
+import { Button, TextField } from "@mui/material";
 
 export const TodoUseForm = (props) => {
 	const {
@@ -17,33 +18,36 @@ export const TodoUseForm = (props) => {
 		addTodo(data);
 		reset();
 	};
+	const [value, setValue] = useState("");
 
-	useEffect(() => {
-		setFocus("todo");
-	}, []);
+	// const [value, setValue] =
+	// 	(React.useState < Dayjs) | (null > dayjs("2014-08-18T21:11:54"));
+
+	const handleChange = () => {
+		setValue("new date value");
+		console.log("change value");
+	};
+
+	// useEffect(() => {
+	// 	setFocus("todo");
+	// }, []);
+
 	return (
-		<form
-			className={cl.container}
-			onSubmit={handleSubmit(submitForm)}
+		<FormContainer
+			defaultValues={{ name: "" }}
+			onSuccess={(data) => console.log(data)}
 		>
-			<input
-				className={cl.todoInput}
-				placeholder="todo..."
-				{...register("todo", { required: true })}
+			<TextFieldElement name="name" label="todo..." required />
+			<DateTimePicker
+				label="Date&Time picker"
+				value={value}
+				onChange={handleChange}
+				renderInput={(params) => <TextField {...params} />}
 			/>
-
-			<input
-				className={cl.todoDateInput}
-				type={"datetime-local"}
-				{...register("todoDate")}
-			/>
-			<button
-				className={cl.btn}
-				type="submit"
-				disabled={!isValid}
-			>
+			<br />
+			<Button type="submit" variant="contained">
 				add
-			</button>
-		</form>
+			</Button>
+		</FormContainer>
 	);
 };

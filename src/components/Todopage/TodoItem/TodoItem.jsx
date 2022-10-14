@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 
 import { MyPopover } from "components/UI/MyPopover/MyPopover";
 import { TodoForm } from "../TodoForm/TodoForm";
+import ClearIcon from "@mui/icons-material/Clear";
 
 import {
 	deleteTodo,
@@ -11,6 +12,7 @@ import {
 } from "api/useFetchingTodos";
 
 import cl from "./TodoItem.module.css";
+import { ListItem, Checkbox, ListItemText } from "@mui/material";
 
 export const TodoItem = ({ todo }) => {
 	const [isUpdating, setIsUpdating] = useState(false);
@@ -35,45 +37,21 @@ export const TodoItem = ({ todo }) => {
 	//update todo
 	const toggleUpdating = (todo) => {
 		console.log("update", todo);
-		setIsUpdating((isUpdating) => !isUpdating);
+		// setIsUpdating((isUpdating) => !isUpdating);
 	};
 
 	return (
-		<div
-			className={
-				todo.complete
-					? `${cl.todo} ${cl.todoComplete}`
-					: cl.todo
-			}
-		>
-			{isUpdating ? (
-				<MyPopover>
-					<TodoForm updating {...todo} />{" "}
-				</MyPopover>
-			) : null}
-			<button
-				className={cl.todoDeleteBtn}
-				onClick={() => deleteTodo(todo)}
-			>
-				del
-			</button>
-			<button
-				className={cl.todoUpdateBtn}
-				onClick={() => toggleUpdating(todo)}
-			>
-				upd
-			</button>
-
-			<input
-				className={cl.todoComplete}
-				type="checkbox"
+		<ListItem divider>
+			<Checkbox
 				checked={todo.complete}
 				onChange={() => toggleTodoComplete(todo)}
 			/>
+			<ListItemText
+				primary={todo.todo}
+				secondary={todo.expired ? date.toDateString() : null}
+			/>
 
-			<span>{date.toDateString()} </span>
-			<span> {todo.todo}</span>
-			<span> {String(todo.expired)}</span>
-		</div>
+			<ClearIcon onClick={() => deleteTodo(todo)} />
+		</ListItem>
 	);
 };

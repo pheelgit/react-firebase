@@ -9,7 +9,7 @@ import { TodoForm } from "components/Todopage/TodoForm/TodoForm";
 import cl from "./Todopage.module.css";
 import { TodoUseForm } from "./TodoUseForm/TodoUseForm";
 import AddIcon from "@mui/icons-material/Add";
-import { Fab } from "@mui/material";
+import { Button, Fab, List } from "@mui/material";
 
 export const TodoPage = () => {
 	const [todos, setTodos] = useState([]);
@@ -36,12 +36,11 @@ export const TodoPage = () => {
 	return (
 		<div className={cl.todoPage}>
 			{todos.length === 0 ? <h1>no todos</h1> : null}
-			<div>
+			<List>
 				{unCompleted.map((todo) => (
 					<TodoItem key={todo.uuid} todo={todo} />
 				))}
-			</div>
-			<hr className="h-2 my-2 bg-rose-500" />
+			</List>
 			<div>
 				{completed.map((todo) => (
 					<TodoItem key={todo.uuid} todo={todo} />
@@ -51,13 +50,14 @@ export const TodoPage = () => {
 			<Fab
 				color="primary"
 				aria-label="add"
-				className="sticky right-6 bottom-6 ml-auto"
+				className="fixed right-6 bottom-6 ml-auto"
+				onClick={() => setIsPopped((prev) => !prev)}
 			>
 				<AddIcon fontSize="large" />
 			</Fab>
-			{/* <TodoUseForm /> */}
+			<TodoUseForm />
 
-			{isPopped ? <TodoForm isVisible={togglePopped} /> : null}
+			{/* {isPopped ? <TodoForm isVisible={togglePopped} /> : null} */}
 		</div>
 	);
 };
