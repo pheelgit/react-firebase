@@ -1,10 +1,14 @@
 import React, { useEffect, useState } from "react";
-import { useForm } from "react-hook-form";
+import { Controller, useForm } from "react-hook-form";
 
 import { addTodo } from "api/useFetchingTodos";
-import { FormContainer, TextFieldElement } from "react-hook-form-mui";
-import { DateTimePicker } from "@mui/x-date-pickers";
+// import {
+// 	FormContainer,
+// 	TextFieldElement,
+// 	DateTimePickerElement,
+// } from "react-hook-form-mui";
 import { Button, TextField } from "@mui/material";
+import { DateTimePicker } from "@mui/x-date-pickers";
 
 export const TodoUseForm = (props) => {
 	const {
@@ -12,42 +16,78 @@ export const TodoUseForm = (props) => {
 		setFocus,
 		handleSubmit,
 		reset,
+		control,
 		formState: { errors, isValid },
 	} = useForm({ mode: "onBlur" });
+
 	const submitForm = (data) => {
+		console.log(data);
+		console.log(typeof data.todoDate);
 		addTodo(data);
 		reset();
 	};
-	const [value, setValue] = useState("");
 
-	// const [value, setValue] =
-	// 	(React.useState < Dayjs) | (null > dayjs("2014-08-18T21:11:54"));
-
-	const handleChange = () => {
-		setValue("new date value");
-		console.log("change value");
-	};
-
-	// useEffect(() => {
-	// 	setFocus("todo");
-	// }, []);
+	useEffect(() => {
+		setFocus("todo");
+	}, []);
 
 	return (
-		<FormContainer
-			defaultValues={{ name: "" }}
-			onSuccess={(data) => console.log(data)}
+		<form
+			onSubmit={handleSubmit(submitForm)}
+			className="flex flex-col gap-4 max-w-xs border-2 border-purple-500 border-solid p-4"
 		>
-			<TextFieldElement name="name" label="todo..." required />
-			<DateTimePicker
-				label="Date&Time picker"
-				value={value}
-				onChange={handleChange}
-				renderInput={(params) => <TextField {...params} />}
+			<Controller
+				name="todo"
+				label="todo..."
+				control={control}
+				defaultValue=""
+				render={({ field }) => (
+					<TextField {...field} label="todo..." />
+				)}
+			/>
+			<Controller
+				name="todoDate"
+				control={control}
+				defaultValue={null}
+				render={({ field }) => (
+					<DateTimePicker
+						{...field}
+						label="Date&Time picker"
+						renderInput={(field) => (
+							<TextField {...field} />
+						)}
+					/>
+				)}
 			/>
 			<br />
+
 			<Button type="submit" variant="contained">
-				add
+				submit
 			</Button>
-		</FormContainer>
+		</form>
 	);
+
+	// return (
+	// 	<FormContainer
+	// 		defaultValues={{ todo: "", todoDate: undefined }}
+	// 		onSuccess={(data) => handleSubmit(submitForm(data))}
+	// 	>
+	// 		<TextFieldElement
+	// 			// name="todo"
+	// 			label="todo..."
+	// 			required
+	// 			{...register("todo")}
+	// 		/>
+	// 		<DateTimePickerElement name="todoDate" label="date..." />
+	// 		<Button type="submit" variant="contained">
+	// 			add
+	// 		</Button>
+	// 		<br />
+	// 		<br />
+	// 		<br />
+	// 		<br />
+	// 		<br />
+	// 		<br />
+	// 	</FormContainer>
+	// );
 };

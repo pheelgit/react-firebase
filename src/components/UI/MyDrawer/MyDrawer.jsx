@@ -9,18 +9,9 @@ import Box from "@mui/material/Box";
 import Skeleton from "@mui/material/Skeleton";
 import Typography from "@mui/material/Typography";
 import SwipeableDrawer from "@mui/material/SwipeableDrawer";
-
-import { TodoUseForm } from "components/Todopage/TodoUseForm/TodoUseForm";
+import { useState } from "react";
 
 const drawerBleeding = 56;
-
-const Root = styled("div")(({ theme }) => ({
-	height: "100%",
-	backgroundColor:
-		theme.palette.mode === "light"
-			? grey[100]
-			: theme.palette.background.default,
-}));
 
 const StyledBox = styled(Box)(({ theme }) => ({
 	backgroundColor: theme.palette.mode === "light" ? "#fff" : grey[800],
@@ -37,9 +28,9 @@ const Puller = styled(Box)(({ theme }) => ({
 	left: "calc(50% - 15px)",
 }));
 
-export const TestPage = (props) => {
+export const MyDrawer = ({ children }, ...props) => {
 	const { window } = props;
-	const [open, setOpen] = React.useState(false);
+	const [open, setOpen] = useState(false);
 
 	const toggleDrawer = (newOpen) => () => {
 		setOpen(newOpen);
@@ -50,7 +41,7 @@ export const TestPage = (props) => {
 		window !== undefined ? () => window().document.body : undefined;
 
 	return (
-		<Root>
+		<>
 			{/* <CssBaseline /> */}
 			<Global
 				styles={{
@@ -60,9 +51,7 @@ export const TestPage = (props) => {
 					},
 				}}
 			/>
-			<Box sx={{ textAlign: "center", pt: 1 }}>
-				<Button onClick={toggleDrawer(true)}>Open</Button>
-			</Box>
+
 			<SwipeableDrawer
 				container={container}
 				anchor="bottom"
@@ -93,9 +82,17 @@ export const TestPage = (props) => {
 						51 results
 					</Typography>
 				</StyledBox>
-
-				<TodoUseForm />
+				<StyledBox
+					sx={{
+						px: 2,
+						pb: 2,
+						height: "100%",
+						overflow: "auto",
+					}}
+				>
+					{children}
+				</StyledBox>
 			</SwipeableDrawer>
-		</Root>
+		</>
 	);
 };

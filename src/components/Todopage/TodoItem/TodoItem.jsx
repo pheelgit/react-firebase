@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 
 import { MyPopover } from "components/UI/MyPopover/MyPopover";
-import { TodoForm } from "../TodoForm/TodoForm";
 import ClearIcon from "@mui/icons-material/Clear";
 
 import {
@@ -50,6 +49,7 @@ export const TodoItem = ({ todo }) => {
 				primary={todo.todo}
 				secondary={todo.expired ? date.toDateString() : null}
 			/>
+			<ListItemText primary={JSON.stringify(todo.date)} />
 
 			<ClearIcon onClick={() => deleteTodo(todo)} />
 		</ListItem>

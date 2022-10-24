@@ -19,8 +19,9 @@ export const addTodo = ({ todo, todoDate }) => {
 		todo,
 		todoDate,
 		uuid,
+		todoDate: Date.parse(todoDate),
 		complete: false,
-		expired: todoDate === "" ? true : false,
+		expired: todoDate ? true : false,
 	});
 };
 
@@ -43,7 +44,6 @@ export const deleteTodo = (todo) => {
 };
 
 //send message to telegram
-
 export const sendTg = (text) => {
 	axios.get(
 		"https://api.telegram.org/bot5400584821:AAGSdMVcRYEGayAzVeU-Eixwz5BfbltJit0/sendMessage",

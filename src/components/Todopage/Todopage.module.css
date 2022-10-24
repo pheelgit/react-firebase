@@ -1,5 +1,5 @@
 .todoPage {
-	@apply h-full flex flex-col justify-end;
+	@apply h-full flex flex-col;
 }
 
 .popOverBtn {

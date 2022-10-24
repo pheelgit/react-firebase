@@ -4,19 +4,32 @@ import { db } from "firebase.js";
 import { ref, onValue } from "firebase/database";
 
 import { TodoItem } from "components/Todopage/TodoItem/TodoItem";
-import { TodoForm } from "components/Todopage/TodoForm/TodoForm";
+import { MyDrawer } from "components/UI/MyDrawer/MyDrawer";
+// import { TodoForm } from "components/Todopage/TodoForm/TodoForm";
 
 import cl from "./Todopage.module.css";
 import { TodoUseForm } from "./TodoUseForm/TodoUseForm";
 import AddIcon from "@mui/icons-material/Add";
-import { Button, Fab, List } from "@mui/material";
+import {
+	Button,
+	Drawer,
+	Fab,
+	List,
+	Popover,
+	Typography,
+} from "@mui/material";
 
 export const TodoPage = () => {
 	const [todos, setTodos] = useState([]);
-	const [isPopped, setIsPopped] = useState(false);
 
-	const togglePopped = () => {
-		setIsPopped(!isPopped);
+	const [isPopped, setIsPopped] = useState(false);
+	const [anchorEl, setAnchorEl] = useState(null);
+
+	const handleClick = (event) => {
+		setAnchorEl(event.currentTarget);
+	};
+	const handleClose = () => {
+		setAnchorEl(null);
 	};
 
 	//connecting to db
@@ -29,8 +42,8 @@ export const TodoPage = () => {
 		});
 	}, []);
 
+	//completed and unCompleted todos
 	const completed = useFilter(todos, ["complete", true]);
-
 	const unCompleted = useFilter(todos, ["complete", false]);
 
 	return (
@@ -47,17 +60,10 @@ export const TodoPage = () => {
 				))}
 			</div>
 			<br />
-			<Fab
-				color="primary"
-				aria-label="add"
-				className="fixed right-6 bottom-6 ml-auto"
-				onClick={() => setIsPopped((prev) => !prev)}
-			>
-				<AddIcon fontSize="large" />
-			</Fab>
-			<TodoUseForm />
 
-			{/* {isPopped ? <TodoForm isVisible={togglePopped} /> : null} */}
+			<MyDrawer>
+				<TodoUseForm />
+			</MyDrawer>
 		</div>
 	);
 };
