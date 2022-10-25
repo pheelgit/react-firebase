@@ -13,15 +13,15 @@ import {
 import axios from "axios";
 
 //add todo
-export const addTodo = ({ todo, todoDate }) => {
+export const addTodo = ({ todo, todoDate, expired }) => {
 	const uuid = uid();
 	set(ref(db, `todos/${uuid}`), {
 		todo,
 		todoDate,
 		uuid,
-		todoDate: Date.parse(todoDate),
+		todoDate: todoDate ? Date.parse(todoDate) : null,
 		complete: false,
-		expired: todoDate ? true : false,
+		expired,
 	});
 };
 

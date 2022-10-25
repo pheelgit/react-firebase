@@ -1,13 +1,16 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { Controller, useForm } from "react-hook-form";
 
 import { addTodo } from "api/useFetchingTodos";
-// import {
-// 	FormContainer,
-// 	TextFieldElement,
-// 	DateTimePickerElement,
-// } from "react-hook-form-mui";
-import { Button, TextField } from "@mui/material";
+
+import {
+	Box,
+	Button,
+	Checkbox,
+	FormControlLabel,
+	Switch,
+	TextField,
+} from "@mui/material";
 import { DateTimePicker } from "@mui/x-date-pickers";
 
 export const TodoUseForm = (props) => {
@@ -22,7 +25,6 @@ export const TodoUseForm = (props) => {
 
 	const submitForm = (data) => {
 		console.log(data);
-		console.log(typeof data.todoDate);
 		addTodo(data);
 		reset();
 	};
@@ -32,19 +34,35 @@ export const TodoUseForm = (props) => {
 	}, []);
 
 	return (
-		<form
-			onSubmit={handleSubmit(submitForm)}
-			className="flex flex-col gap-4 max-w-xs border-2 border-purple-500 border-solid p-4"
-		>
+		<Box component="form" onSubmit={handleSubmit(submitForm)}>
 			<Controller
 				name="todo"
-				label="todo..."
 				control={control}
 				defaultValue=""
+				rules={{ required: true }}
 				render={({ field }) => (
 					<TextField {...field} label="todo..." />
 				)}
 			/>
+			<br />
+			<br />
+			<Controller
+				name="expired"
+				control={control}
+				defaultValue={false}
+				defaultChecked={false}
+				value={false}
+				render={({ field }) => (
+					<FormControlLabel
+						{...field}
+						defaultChecked={false}
+						control={<Switch {...field} />}
+						label="send tg?"
+					/>
+				)}
+			/>
+			<br />
+
 			<Controller
 				name="todoDate"
 				control={control}
@@ -60,34 +78,10 @@ export const TodoUseForm = (props) => {
 				)}
 			/>
 			<br />
-
+			<br />
 			<Button type="submit" variant="contained">
 				submit
 			</Button>
-		</form>
+		</Box>
 	);
-
-	// return (
-	// 	<FormContainer
-	// 		defaultValues={{ todo: "", todoDate: undefined }}
-	// 		onSuccess={(data) => handleSubmit(submitForm(data))}
-	// 	>
-	// 		<TextFieldElement
-	// 			// name="todo"
-	// 			label="todo..."
-	// 			required
-	// 			{...register("todo")}
-	// 		/>
-	// 		<DateTimePickerElement name="todoDate" label="date..." />
-	// 		<Button type="submit" variant="contained">
-	// 			add
-	// 		</Button>
-	// 		<br />
-	// 		<br />
-	// 		<br />
-	// 		<br />
-	// 		<br />
-	// 		<br />
-	// 	</FormContainer>
-	// );
 };
