@@ -7,8 +7,8 @@ import { TodoLists } from "./TodoLists/TodoLists";
 export const TodoPage = () => {
 	return (
 		<>
-			<TodoLists list="completed" />
 			<TodoLists list="unCompleted" />
+			<TodoLists list="completed" />
 
 			<MyDrawer>
 				<TodoUseForm />

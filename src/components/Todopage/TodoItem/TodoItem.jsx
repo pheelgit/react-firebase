@@ -8,6 +8,7 @@ import {
 	toggleTodoComplete,
 	toggleTodoExpired,
 	sendTg,
+	updateTodo,
 } from "api/useFetchingTodos";
 
 import {
@@ -20,10 +21,10 @@ import {
 	Switch,
 } from "@mui/material";
 import SettingsIcon from "@mui/icons-material/Settings";
+import { Controller, useForm } from "react-hook-form";
 
 export const TodoItem = ({ todo }) => {
 	const [isUpdating, setIsUpdating] = useState(false);
-	const [updatingTodo, setIsUpdatingTodo] = useState(todo);
 	const date = new Date(todo.todoDate);
 
 	// checking to sendTG
@@ -42,22 +43,39 @@ export const TodoItem = ({ todo }) => {
 		return () => clearInterval(checkDate);
 	}, []);
 
+	const { handleSubmit, watch, control, register, setFocus } = useForm();
+
+	const newTodo = watch("todo");
 	//update todo
-	const toggleUpdating = (todo) => {
-		console.log("update", todo);
-		// setIsUpdating((isUpdating) => !isUpdating);
+	const handleUpdate = () => {
+		setIsUpdating(false);
+		updateTodo({ ...todo, todo: newTodo });
 	};
+
+	useEffect(() => {
+		setFocus("todo");
+	}, [setFocus]);
 
 	return (
 		<ListItem divider className="flex justify-between">
 			{isUpdating ? (
-				<>
-					<TextField
-						variant="standard"
-						value={todo.todo}
+				<Box
+					component="form"
+					onSubmit={handleSubmit(handleUpdate)}
+				>
+					<Controller
+						name="todo"
+						control={control}
+						defaultValue={todo.todo}
+						rules={{ required: true }}
+						render={({ field }) => (
+							<TextField
+								{...field}
+								variant="standard"
+							/>
+						)}
 					/>
-					<Switch />
-				</>
+				</Box>
 			) : (
 				<FormControlLabel
 					label={
@@ -84,7 +102,7 @@ export const TodoItem = ({ todo }) => {
 			<Box className="flex gap-4 ">
 				{isUpdating ? (
 					<PublishedWithChanges
-						onClick={() => setIsUpdating(false)}
+						onClick={() => handleUpdate(todo)}
 					/>
 				) : (
 					<SettingsIcon

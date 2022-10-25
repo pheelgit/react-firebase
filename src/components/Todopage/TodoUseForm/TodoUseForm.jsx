@@ -9,7 +9,6 @@ import {
 	Checkbox,
 	FormControlLabel,
 	Switch,
-	watch,git
 	TextField,
 } from "@mui/material";
 import { DateTimePicker } from "@mui/x-date-pickers";
@@ -20,6 +19,7 @@ export const TodoUseForm = (props) => {
 		setFocus,
 		handleSubmit,
 		reset,
+		watch,
 		control,
 		formState: { errors, isValid },
 	} = useForm({ mode: "onBlur" });
@@ -30,9 +30,12 @@ export const TodoUseForm = (props) => {
 		reset();
 	};
 
+	const watchTg = watch("expired");
+
 	useEffect(() => {
-		setFocus("todo");
-	}, []);
+		// setFocus("todo");
+		console.log(watchTg);
+	}, [watchTg]);
 
 	return (
 		<Box component="form" onSubmit={handleSubmit(submitForm)}>
@@ -47,6 +50,7 @@ export const TodoUseForm = (props) => {
 			/>
 			<br />
 			<br />
+
 			<Controller
 				name="expired"
 				control={control}
@@ -62,22 +66,25 @@ export const TodoUseForm = (props) => {
 					/>
 				)}
 			/>
-			<br />
 
-			<Controller
-				name="todoDate"
-				control={control}
-				defaultValue={null}
-				render={({ field }) => (
-					<DateTimePicker
-						{...field}
-						label="Date&Time picker"
-						renderInput={(field) => (
-							<TextField {...field} />
-						)}
-					/>
-				)}
-			/>
+			<br />
+			{watchTg ? (
+				<Controller
+					name="todoDate"
+					control={control}
+					defaultValue={null}
+					rules={{ required: true }}
+					render={({ field }) => (
+						<DateTimePicker
+							{...field}
+							label="Date&Time picker"
+							renderInput={(field) => (
+								<TextField {...field} />
+							)}
+						/>
+					)}
+				/>
+			) : null}
 			<br />
 			<br />
 			<Button type="submit" variant="contained">
