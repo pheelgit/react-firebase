@@ -2,8 +2,6 @@ import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { addShopItem } from "api/useFetchingShopList";
 
-import cl from "./ShopInput.module.css";
-
 export const ShopItemInput = () => {
 	const [shopItem, setShopItem] = useState({ item: "", type: "" });
 	const { "*": shopItemType } = useParams();
@@ -31,9 +29,8 @@ export const ShopItemInput = () => {
 
 	return (
 		<div className="relative">
-			<div className={isPopped ? cl.popOverContent : cl.hide}>
+			<div>
 				<input
-					className={cl.input}
 					type="text"
 					value={shopItem.item}
 					onChange={(e) =>

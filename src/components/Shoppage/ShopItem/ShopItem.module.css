@@ -1,9 +1,0 @@
-.item {
-	@apply my-2;
-}
-.itemComplete {
-	@apply my-2 bg-slate-400;
-}
-.complete {
-	@apply mx-2;
-}

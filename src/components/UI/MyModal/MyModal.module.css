@@ -1,7 +1,0 @@
-.container {
-	@apply fixed inset-0 bg-purple-800/70 flex items-center justify-center;
-}
-
-.content {
-	@apply w-3/4 bg-violet-300/90 min-h-fit rounded-lg p-6;
-}

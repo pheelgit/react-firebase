@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { Link, useNavigate, useLocation } from "react-router-dom";
-import { ShoppageRouter } from "./ShoppageRouter";
-import { ShopItemInput } from "./ShopItemInput/ShopItemInput";
+import { ShopPageRouter } from "./ShopPageRouter";
+import { ShopItemInput } from "./ShopItemInput";
 
-import cl from "./ShopPage.module.css";
+import { Box } from "@mui/material";
+import { ShopNavigate } from "./ShopNavigate";
 
 export const Shoppage = () => {
 	const navigate = useNavigate();
@@ -14,37 +15,10 @@ export const Shoppage = () => {
 	}, [pathname]);
 
 	return (
-		<div className={cl.page}>
-			<div className={cl.content}>
-				<ShoppageRouter />
-			</div>
-			<div className={cl.main}>
-				<span className={cl.nav}>
-					<Link
-						to="food"
-						className={
-							pathname.includes("food")
-								? "bg-red-200"
-								: ""
-						}
-					>
-						food
-					</Link>
-					<Link
-						to="other"
-						className={
-							pathname.includes("other")
-								? "bg-red-200"
-								: ""
-						}
-					>
-						other
-					</Link>
-				</span>
-				<span className={cl.input}>
-					<ShopItemInput />
-				</span>
-			</div>
-		</div>
+		<>
+			<ShopPageRouter />
+			<ShopNavigate />
+			<ShopItemInput />
+		</>
 	);
 };

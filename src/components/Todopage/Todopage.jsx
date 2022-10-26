@@ -1,8 +1,9 @@
 import React from "react";
 
+import { TodoLists } from "./TodoLists";
 import { MyDrawer } from "components/UI/MyDrawer/MyDrawer";
-import { TodoUseForm } from "./TodoUseForm/TodoUseForm";
-import { TodoLists } from "./TodoLists/TodoLists";
+import { TodoUseForm } from "./TodoUseForm";
+import { Paper } from "@mui/material";
 
 export const TodoPage = () => {
 	return (
@@ -10,9 +11,7 @@ export const TodoPage = () => {
 			<TodoLists list="unCompleted" />
 			<TodoLists list="completed" />
 
-			<MyDrawer>
-				<TodoUseForm />
-			</MyDrawer>
+			<MyDrawer children={<TodoUseForm />} />
 		</>
 	);
 };

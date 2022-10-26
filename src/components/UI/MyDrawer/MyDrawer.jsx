@@ -2,7 +2,7 @@ import * as React from "react";
 import { Global } from "@emotion/react";
 import { styled } from "@mui/material/styles";
 import CssBaseline from "@mui/material/CssBaseline";
-import { green, grey } from "@mui/material/colors";
+import { grey } from "@mui/material/colors";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import SwipeableDrawer from "@mui/material/SwipeableDrawer";
@@ -18,7 +18,7 @@ const Puller = styled(Box)(({ theme }) => ({
 	width: 30,
 	height: 6,
 	backgroundColor:
-		theme.palette.mode === "light" ? green[300] : grey[900],
+		theme.palette.mode === "light" ? grey[300] : grey[900],
 	borderRadius: 3,
 	position: "absolute",
 	top: 8,
@@ -34,7 +34,6 @@ export const MyDrawer = ({ children }, ...props) => {
 
 	return (
 		<>
-			<CssBaseline />
 			<Global
 				styles={{
 					".MuiDrawer-root > .MuiPaper-root": {
@@ -74,7 +73,6 @@ export const MyDrawer = ({ children }, ...props) => {
 						<br />
 					</Typography>
 				</StyledBox>
-
 				{children}
 			</SwipeableDrawer>
 		</>

@@ -1,6 +1,6 @@
 import React from "react";
 
-import { TodoItem } from "components/Todopage/TodoItem/TodoItem";
+import { TodoItem } from "components/Todopage/TodoItem";
 import { List } from "@mui/material";
 import { useDataBase } from "api/useFetchingTodos";
 

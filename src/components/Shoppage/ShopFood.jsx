@@ -4,14 +4,14 @@ import { useFilter } from "hooks/useFilter";
 import { db } from "firebase.js";
 import { onValue, ref } from "firebase/database";
 import { useState } from "react";
-import { ShopItem } from "../ShopItem/ShopItem";
+import { ShopItem } from "./ShopItem";
 
-export const ShopOther = () => {
+export const ShopFood = () => {
 	const [items, setItems] = useState([]);
 
-	//connected to db
+	//connecting to db
 	useEffect(() => {
-		onValue(ref(db, "shoplist/other"), (snapshot) => {
+		onValue(ref(db, "shoplist/food"), (snapshot) => {
 			const data = snapshot.val();
 			data && setItems(Object.values(data));
 		});
@@ -22,11 +22,12 @@ export const ShopOther = () => {
 
 	return (
 		<div>
-			<hr className="h-2 bg-indigo-800" />
 			{unCompleted.map((item) => (
 				<ShopItem key={item.uuid} {...item} />
 			))}
-			<hr className="h-2 bg-indigo-800" />
+
+			<hr className="h-2 bg-emerald-500" />
+
 			{completed.map((item) => (
 				<ShopItem key={item.uuid} {...item} />
 			))}

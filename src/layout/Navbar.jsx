@@ -1,16 +1,12 @@
 import React, { useEffect } from "react";
-import { Link, useNavigate } from "react-router-dom";
-import { CustomLink } from "components/UI/MyLink/CustomLink";
-import cl from "./Navbar.module.css";
+import { useNavigate } from "react-router-dom";
+
 import { BottomNavigation, BottomNavigationAction } from "@mui/material";
 import {
 	AddShoppingCart,
 	BugReport,
-	Favorite,
 	GradingOutlined,
 	Home,
-	LocationOn,
-	Restore,
 } from "@mui/icons-material";
 import { useState } from "react";
 

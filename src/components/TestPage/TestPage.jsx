@@ -10,7 +10,7 @@ import Skeleton from "@mui/material/Skeleton";
 import Typography from "@mui/material/Typography";
 import SwipeableDrawer from "@mui/material/SwipeableDrawer";
 
-import { TodoUseForm } from "components/Todopage/TodoUseForm/TodoUseForm";
+import { TodoUseForm } from "components/Todopage/TodoUseForm";
 
 const drawerBleeding = 56;
 

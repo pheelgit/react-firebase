@@ -38,7 +38,11 @@ export const TodoUseForm = (props) => {
 	}, [watchTg]);
 
 	return (
-		<Box component="form" onSubmit={handleSubmit(submitForm)}>
+		<Box
+			component="form"
+			onSubmit={handleSubmit(submitForm)}
+			className="flex flex-col justify-center items-center bg-red-500"
+		>
 			<Controller
 				name="todo"
 				control={control}

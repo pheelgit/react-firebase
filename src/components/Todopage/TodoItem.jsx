@@ -49,6 +49,7 @@ export const TodoItem = ({ todo }) => {
 	//update todo
 	const handleUpdate = () => {
 		setIsUpdating(false);
+		if (todo.todo === newTodo) return;
 		updateTodo({ ...todo, todo: newTodo });
 	};
 

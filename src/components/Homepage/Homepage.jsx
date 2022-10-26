@@ -1,20 +1,13 @@
-import { Button, ButtonBase, Container, Popover } from "@mui/material";
-import {
-	AccessAlarm,
-	ThreeDRotation,
-	AccountCircle,
-} from "@mui/icons-material";
-// import AccountCircleIcon from "@mui/icons-material/AccountCircle";
+import { Button, Container, Popover } from "@mui/material";
 
 import React from "react";
-import cl from "./Homepage.module.css";
 import { useState } from "react";
 
 export const Homepage = () => {
 	const [openPopover, setOpenPopover] = useState(false);
 	const togglePopover = () => setOpenPopover((prev) => !prev);
 	return (
-		<div className={cl.homePage}>
+		<>
 			<Container>
 				<Button
 					variant="contained"
@@ -25,6 +18,6 @@ export const Homepage = () => {
 					<Popover open={openPopover}>qwewe</Popover>
 				</Button>
 			</Container>
-		</div>
+		</>
 	);
 };
