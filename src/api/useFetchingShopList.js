@@ -11,20 +11,36 @@ import {
 	push,
 } from "firebase/database";
 import axios from "axios";
+import { useEffect, useState } from "react";
+import { useFilter } from "hooks/useFilter";
+
+//connect to db
+export const useDataBase = (type) => {
+	const [items, setItems] = useState([]);
+	useEffect(() => {
+		onValue(ref(db, `shoplist/${type}`), (snapshot) => {
+			const data = snapshot.val();
+			data && setItems(Object.values(data));
+		});
+	}, []);
+	const completed = useFilter(items, ["complete", true]);
+	const unCompleted = useFilter(items, ["complete", false]);
+
+	return { items, completed, unCompleted };
+};
 
 //add  shopItem
-export const addShopItem = ({ item, type }) => {
+export const addShopItem = (type, { item }) => {
 	const uuid = uid();
 	set(ref(db, `shoplist/${type}/${uuid}`), {
 		item,
-		type,
 		uuid,
 		complete: false,
 	});
 };
 
 //toggle complete
-export const toggleShopComplete = ({ type, uuid, complete }) => {
+export const toggleShopComplete = (type, { uuid, complete }) => {
 	update(ref(db, `shoplist/${type}/${uuid}`), {
 		complete: !complete,
 	});

@@ -17,40 +17,37 @@ export const Navbar = () => {
 	useEffect(() => {
 		setTimeout(() => {
 			navigate(value);
-			console.log(value);
 		}, 200);
 	}, [value]);
 
 	return (
-		<>
-			<BottomNavigation
-				className="sticky top-0"
-				value={value}
-				onChange={(event, newValue) => {
-					setValue(newValue);
-				}}
-			>
-				<BottomNavigationAction
-					value={"/"}
-					label="home"
-					icon={<Home />}
-				/>
-				<BottomNavigationAction
-					value={"shoplist"}
-					label="shop"
-					icon={<AddShoppingCart />}
-				/>
-				<BottomNavigationAction
-					value={"todos"}
-					label="todos"
-					icon={<GradingOutlined />}
-				/>
-				<BottomNavigationAction
-					value={"test"}
-					label="test"
-					icon={<BugReport />}
-				/>
-			</BottomNavigation>
-		</>
+		<BottomNavigation
+			value={value}
+			onChange={(event, newValue) => {
+				setValue(newValue);
+			}}
+			className="rounded-xl"
+		>
+			<BottomNavigationAction
+				value={"/"}
+				label="home"
+				icon={<Home />}
+			/>
+			<BottomNavigationAction
+				value={"shoplist"}
+				label="shop"
+				icon={<AddShoppingCart />}
+			/>
+			<BottomNavigationAction
+				value={"todos"}
+				label="todos"
+				icon={<GradingOutlined />}
+			/>
+			<BottomNavigationAction
+				value={"test"}
+				label="test"
+				icon={<BugReport />}
+			/>
+		</BottomNavigation>
 	);
 };

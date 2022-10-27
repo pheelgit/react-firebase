@@ -14,45 +14,18 @@ const Item = styled(Paper)(({ theme }) => ({
 
 export const Layout = () => {
 	return (
-		<>
-			<Box className="flex flex-col gap-4 p-2 h-screen ">
-				<Paper
-					children={<Navbar />}
-					elevation={10}
-					className="rounded-xl overflow-hidden"
-				/>
-				<Paper
-					component="main"
-					className="rounded-xl overflow-hidden grow"
-					children={<AppRouter />}
-					elevation={10}
-				/>
-			</Box>
-			{/* <AppRouter />
-			</Box> */}
-			{/* <Box sx={{ flexGrow: 1, width: "100%" }}>
-				<Grid container spacing={1} columns={1}>
-					<Grid
-						display="flex"
-						justifyContent="stretch"
-						alignItems="stretch"
-					>
-						<Paper
-							children={<Navbar />}
-							elevation={10}
-						/>
-					</Grid>
-					<Grid
-						display="flex"
-						justifyContent="stretch"
-						alignItems="stretch"
-					>
-						<Box component="main">
-							<AppRouter />
-						</Box>
-					</Grid>
-				</Grid>
-			</Box> */}
-		</>
+		<Box className="flex flex-col gap-4 p-2 h-screen ">
+			<Paper
+				children={<Navbar />}
+				elevation={10}
+				className=" basis-1/12 sticky  top-2 opacity-100"
+			/>
+			<Paper
+				component="main"
+				children={<AppRouter />}
+				elevation={10}
+				className="rounded-xl  basis-11/12 mt-1/12 overflow-scroll"
+			/>
+		</Box>
 	);
 };

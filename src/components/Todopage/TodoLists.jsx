@@ -28,7 +28,7 @@ export const TodoLists = ({ list }) => {
 			);
 		case "unCompleted":
 			return (
-				<List className="">
+				<List>
 					{unCompleted.map((todo) => (
 						<TodoItem key={todo.uuid} todo={todo} />
 					))}
