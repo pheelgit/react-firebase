@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
-import { ShopPageRouter } from "./ShopPageRouter";
+import { ShoppageRouter } from "./ShoppageRouter";
 import { ShopItemInput } from "./ShopItemInput";
 
 import { Box, Divider } from "@mui/material";
@@ -19,7 +19,7 @@ export const Shoppage = () => {
 		<Box className=" h-full grid items-start grid-rows-[3em_1fr_6em]  ">
 			<ShopNavigate />
 
-			<ShopPageRouter />
+			<ShoppageRouter />
 			<MyDrawer children={<ShopItemInput />} />
 		</Box>
 	);

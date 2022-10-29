@@ -28,64 +28,67 @@ export const ShopItemInput = () => {
 		reset();
 	};
 
-	return (
-		<Box component="form" onSubmit={handleSubmit(submitForm)}>
-			<Controller
-				name="item"
-				control={control}
-				defaultValue=""
-				rules={{ required: true }}
-				render={({ field }) => (
-					<TextField {...field} label="food..." />
-				)}
-			/>
-			<br />
-			<br />
-			<Controller
-				name="quantity"
-				defaultValue={1}
-				control={control}
-				render={({ field }) => (
-					<TextField
-						sx={{ maxWidth: 80 }}
-						type={"number"}
-						{...field}
-						label="кол-во"
-					/>
-				)}
-			/>
-			<Controller
-				name="typeQuantity"
-				defaultValue="kg"
-				control={control}
-				render={({ field }) => (
-					<FormControl
-						fullWidth
-						{...field}
-						sx={{ maxWidth: 80 }}
-					>
-						<Select
+	if (itemType === "other") return <Box>other</Box>;
+
+	if (itemType === "food")
+		return (
+			<Box component="form" onSubmit={handleSubmit(submitForm)}>
+				<Controller
+					name="item"
+					control={control}
+					defaultValue=""
+					rules={{ required: true }}
+					render={({ field }) => (
+						<TextField {...field} label={itemType} />
+					)}
+				/>
+				<br />
+				<br />
+				<Controller
+					name="quantity"
+					defaultValue={1}
+					control={control}
+					render={({ field }) => (
+						<TextField
+							sx={{ maxWidth: 80 }}
+							type={"number"}
 							{...field}
-							control={control}
-							defaultValue={"kg"}
+							label="кол-во"
+						/>
+					)}
+				/>
+				<Controller
+					name="typeQuantity"
+					defaultValue="kg"
+					control={control}
+					render={({ field }) => (
+						<FormControl
+							fullWidth
+							{...field}
+							sx={{ maxWidth: 80 }}
 						>
-							<MenuItem value={"kg"}>
-								кг
-							</MenuItem>
-							<MenuItem value={"pieces"}>
-								шт.
-							</MenuItem>
-						</Select>
-					</FormControl>
-				)}
-			/>
+							<Select
+								{...field}
+								control={control}
+								defaultValue={"kg"}
+							>
+								<MenuItem value={"kg"}>
+									кг
+								</MenuItem>
+								<MenuItem value={"pieces"}>
+									шт.
+								</MenuItem>
+							</Select>
+						</FormControl>
+					)}
+				/>
 
-			<br />
-			<br />
+				<br />
+				<br />
 
-			<Button type="submit" variant="contained">
-				submit
-			</Button>
-		</Box>
-	);
+				<Button type="submit" variant="contained">
+					submit
+				</Button>
+			</Box>
+		);
 };
