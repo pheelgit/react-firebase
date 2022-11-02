@@ -3,14 +3,31 @@ import React from "react";
 import { TodoLists } from "./TodoLists";
 import { MyDrawer } from "components/UI/MyDrawer/MyDrawer";
 import { TodoUseForm } from "./TodoUseForm";
-import { Divider } from "@mui/material";
+import {
+	Accordion,
+	AccordionDetails,
+	AccordionSummary,
+	Divider,
+	Typography,
+} from "@mui/material";
+
+import DoneIcon from "@mui/icons-material/Done";
 
 export const TodoPage = () => {
 	return (
 		<>
 			<TodoLists list="unCompleted" />
 			<Divider />
-			<TodoLists list="completed" />
+
+			<Accordion>
+				<AccordionSummary expandIcon={<DoneIcon />}>
+					<Typography> completed</Typography>
+				</AccordionSummary>
+				<AccordionDetails>
+					<TodoLists list="completed" />
+				</AccordionDetails>
+			</Accordion>
+
 			<MyDrawer children={<TodoUseForm />} />
 		</>
 	);
