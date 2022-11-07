@@ -58,9 +58,10 @@ export const TodoItem = ({ todo }) => {
 	}, [setFocus]);
 
 	return (
-		<ListItem divider className="flex justify-between">
+		<ListItem divider className="flex">
 			{isUpdating ? (
 				<Box
+					className="grow"
 					component="form"
 					onSubmit={handleSubmit(handleUpdate)}
 				>
@@ -79,6 +80,7 @@ export const TodoItem = ({ todo }) => {
 				</Box>
 			) : (
 				<FormControlLabel
+					className="grow"
 					label={
 						<ListItemText
 							primary={todo.todo}

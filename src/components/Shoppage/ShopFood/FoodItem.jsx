@@ -10,7 +10,7 @@ import {
 	TextField,
 	Typography,
 } from "@mui/material";
-import { toggleShopComplete } from "api/useFetchingShopList";
+import { deleteShopItem, toggleShopComplete } from "api/useFetchingShopList";
 import { useParams } from "react-router-dom";
 
 import ClearIcon from "@mui/icons-material/Clear";
@@ -19,7 +19,7 @@ export const FoodItem = ({ food }) => {
 	const { item, complete, uuid, quantity, typeQuantity } = food;
 	const { "*": itemType } = useParams();
 	return (
-		<ListItem className="flex justify-between">
+		<ListItem className="flex">
 			<FormControlLabel
 				className="grow"
 				label={
@@ -42,7 +42,9 @@ export const FoodItem = ({ food }) => {
 				}
 			/>
 
-			<ClearIcon />
+			<ClearIcon
+				onClick={() => deleteShopItem(itemType, uuid)}
+			/>
 		</ListItem>
 	);
 };

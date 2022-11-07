@@ -9,7 +9,6 @@ import {
 	Typography,
 } from "@mui/material";
 
-import EventRepeatIcon from "@mui/icons-material/EventRepeat";
 import DoneIcon from "@mui/icons-material/Done";
 
 export const ShopFood = () => {

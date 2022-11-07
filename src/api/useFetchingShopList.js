@@ -45,3 +45,8 @@ export const toggleShopComplete = (type, { uuid, complete }) => {
 		complete: !complete,
 	});
 };
+
+//delete todo
+export const deleteShopItem = (type, uuid) => {
+	remove(ref(db, `/shoplist/${type}/${uuid}`));
+};
