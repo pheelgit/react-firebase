@@ -30,10 +30,10 @@ export const useDataBase = (type) => {
 };
 
 //add  shopItem
-export const addShopItem = (type, { item }) => {
+export const addShopItem = (type, item) => {
 	const uuid = uid();
 	set(ref(db, `shoplist/${type}/${uuid}`), {
-		item,
+		...item,
 		uuid,
 		complete: false,
 	});

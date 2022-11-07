@@ -1,9 +1,7 @@
 import React from "react";
-import { useParams } from "react-router-dom";
+import { useDataBaseMoney } from "api/useMoney";
 
 export const TestPage = (props) => {
-	const { "*": itemType } = useParams();
-	console.log(itemType);
-
-	return <>{itemType}</>;
+	const { money } = useDataBaseMoney(2021);
+	return <>{JSON.stringify(money[15], null, `\n`)}</>;
 };
