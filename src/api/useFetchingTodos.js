@@ -21,9 +21,7 @@ export const useDataBase = () => {
 	useEffect(() => {
 		onValue(ref(db, "todos"), (snapshot) => {
 			const data = snapshot.val();
-			data === null
-				? setTodos([])
-				: setTodos(Object.values(data));
+			data && setTodos(Object.values(data));
 		});
 	}, []);
 

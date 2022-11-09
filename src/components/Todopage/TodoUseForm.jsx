@@ -32,11 +32,6 @@ export const TodoUseForm = (props) => {
 
 	const watchTg = watch("expired");
 
-	useEffect(() => {
-		// setFocus("todo");
-		console.log(watchTg);
-	}, [watchTg]);
-
 	return (
 		<Box
 			component="form"
