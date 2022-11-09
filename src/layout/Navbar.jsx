@@ -7,6 +7,7 @@ import {
 	BugReport,
 	GradingOutlined,
 	Home,
+	AttachMoney,
 } from "@mui/icons-material";
 import { useState } from "react";
 
@@ -46,7 +47,7 @@ export const Navbar = () => {
 			<BottomNavigationAction
 				value={"test"}
 				label="test"
-				icon={<BugReport />}
+				icon={<AttachMoney />}
 			/>
 		</BottomNavigation>
 	);
