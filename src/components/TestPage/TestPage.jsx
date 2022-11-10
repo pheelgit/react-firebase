@@ -4,7 +4,7 @@ import { CartesianGrid, Line, LineChart, XAxis, YAxis } from "recharts";
 import { Tooltip } from "@mui/material";
 
 export const TestPage = (props) => {
-	const [food2021] = useDataForChartLine1({ year: 2021, id: "food" });
+	const [food2021] = useDataForChartLine1({ year: 2022, id: "food" });
 	return (
 		<>
 			<br />
